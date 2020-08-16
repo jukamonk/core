@@ -1,6 +1,6 @@
 """Monitor the NZBGet API."""
 import logging
-from typing import Any, Callable, Dict, List, Optional, Union
+from typing import Callable, List, Optional
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
