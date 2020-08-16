@@ -41,7 +41,7 @@ SERVICE_PAUSE = "pause"
 SERVICE_RESUME = "resume"
 SERVICE_SET_SPEED = "set_speed"
 
-PLATFORMS = ["sensor", "switch"]
+PLATFORMS = ["sensor"]
 
 SPEED_LIMIT_SCHEMA = vol.Schema(
     {vol.Optional(ATTR_SPEED, default=DEFAULT_SPEED_LIMIT): cv.positive_int}
@@ -273,7 +273,7 @@ class NZBGetEntity(Entity):
     def __init__(
         self, *, entry_id: str, name: str, coordinator: NZBGetDataUpdateCoordinator
     ) -> None:
-        """Initialize the Roku entity."""
+        """Initialize the NZBGet entity."""
         self._name = name
         self._entry_id = entry_id
         self.coordinator = coordinator
