@@ -10,8 +10,8 @@
           "username": "[%key:common::config_flow::data::username%]",
           "password": "[%key:common::config_flow::data::password%]",
           "port": "[%key:common::config_flow::data::port%]",
-          "ssl": "Sonarr uses a SSL certificate",
-          "verify_ssl": "Sonarr uses a proper certificate"
+          "ssl": "NZBGet uses a SSL certificate",
+          "verify_ssl": "NZBGet uses a proper certificate"
         }
       }
     },
