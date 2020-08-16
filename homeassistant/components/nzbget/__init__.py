@@ -22,24 +22,21 @@ from homeassistant.helpers.typing import HomeAssistantType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
+    ATTR_SPEED,
     DATA_COORDINATOR,
     DATA_UNDO_UPDATE_LISTENER,
+    DEFAULT_NAME,
     DEFAULT_PORT,
     DEFAULT_SCAN_INTERVAL,
+    DEFAULT_SPEED_LIMIT,
     DEFAULT_SSL,
     DOMAIN,
+    SERVICE_PAUSE,
+    SERVICE_RESUME,
+    SERVICE_SET_SPEED,
 )
 
 _LOGGER = logging.getLogger(__name__)
-
-ATTR_SPEED = "speed"
-
-DEFAULT_NAME = "NZBGet"
-DEFAULT_SPEED_LIMIT = 1000  # 1 Megabyte/Sec
-
-SERVICE_PAUSE = "pause"
-SERVICE_RESUME = "resume"
-SERVICE_SET_SPEED = "set_speed"
 
 PLATFORMS = ["sensor"]
 
