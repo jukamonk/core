@@ -20,6 +20,7 @@ from homeassistant.core import callback
 from homeassistant.helpers.typing import ConfigType, HomeAssistantType
 
 from .const import (
+    DEFAULT_NAME,
     DEFAULT_PORT,
     DEFAULT_SCAN_INTERVAL,
     DEFAULT_SSL,
@@ -91,6 +92,7 @@ class NZBGetConfigFlow(ConfigFlow, domain=DOMAIN):
         """Show the setup form to the user."""
         data_schema = {
             vol.Required(CONF_HOST): str,
+            vol.Optional(CONF_NAME, default=DEFAULT_NAME): str,
             vol.Optional(CONF_USERNAME): str,
             vol.Optional(CONF_PASSWORD): str,
             vol.Optional(CONF_PORT, default=DEFAULT_PORT): int,
