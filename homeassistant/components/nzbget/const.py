@@ -1,7 +1,7 @@
 """Constants for NZBGet."""
 DOMAIN = "nzbget"
 
-# Atrributes
+# Attributes
 ATTR_SPEED = "speed"
 
 # Data
