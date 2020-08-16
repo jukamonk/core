@@ -1,4 +1,4 @@
-"""Test the Nightscout config flow."""
+"""Test the NZBGet config flow."""
 from pynzbgetapi import NZBGetAPIException
 
 from homeassistant import setup
