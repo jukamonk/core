@@ -82,12 +82,12 @@ class NZBGetSensor(NZBGetEntity, Entity):
 
     @property
     def unique_id(self) -> str:
-        """Return the unique ID for this sensor."""
+        """Return the unique ID of the sensor."""
         return self._unique_id
 
     @property
     def unit_of_measurement(self) -> str:
-        """Return the unit this state is expressed in."""
+        """Return the unit that the state of sensor is expressed in."""
         return self._unit_of_measurement
 
     @property
