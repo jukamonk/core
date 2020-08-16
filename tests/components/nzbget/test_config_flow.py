@@ -78,7 +78,6 @@ async def test_user_form_unexpected_exception(hass):
 async def test_user_form_duplicate(hass):
     """Test duplicate entries."""
     with _patch_version(), _patch_status():
-        unique_id = "10.10.10.30:6789"
         entry = MockConfigEntry(domain=DOMAIN, data={CONF_HOST: "10.10.10.30"})
         await hass.config_entries.async_add(entry)
 
