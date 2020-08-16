@@ -2,6 +2,7 @@
 DOMAIN = "nzbget"
 
 # Data
+DATA_COORDINATOR = "corrdinator"
 DATA_UNDO_UPDATE_LISTENER = "undo_update_listener"
 
 # Defaults
