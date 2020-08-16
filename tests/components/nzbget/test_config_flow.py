@@ -1,7 +1,6 @@
 """Test the NZBGet config flow."""
 from pynzbgetapi import NZBGetAPIException
 
-from homeassistant import setup
 from homeassistant.components.nzbget.const import DOMAIN
 from homeassistant.config_entries import SOURCE_USER
 from homeassistant.const import CONF_HOST
@@ -61,7 +60,7 @@ async def test_user_form_cannot_connect(hass):
 async def test_user_form_unexpected_exception(hass):
     """Test we handle unexpected exception."""
     result = await hass.config_entries.flow.async_init(
-        DOMAIN, context={"source": config_entries.SOURCE_USER}
+        DOMAIN, context={"source": SOURCE_USER}
     )
 
     with patch(
@@ -80,7 +79,7 @@ async def test_user_form_duplicate(hass):
     """Test duplicate entries."""
     with _patch_version(), _patch_status():
         unique_id = "10.10.10.30:6789"
-        entry = MockConfigEntry(domain=DOMAIN, unique_id=unique_id)
+        entry = MockConfigEntry(domain=DOMAIN, data={CONF_HOST: "10.10.10.30"})
         await hass.config_entries.async_add(entry)
 
         result = await hass.config_entries.flow.async_init(
