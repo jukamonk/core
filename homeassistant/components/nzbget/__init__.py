@@ -1,8 +1,8 @@
-"""The nzbget component."""
+"""The NZBGet integration."""
 from datetime import timedelta
 import logging
 
-import pynzbgetapi
+from pynzbgetapi import NZBGetAPI, NZBGetAPIException
 import voluptuous as vol
 
 from homeassistant.const import (
@@ -66,9 +66,9 @@ CONFIG_SCHEMA = vol.Schema(
 
 def _get_nzbget_api_instance(
     host, username=None, password=None, secure=False, verify_certificate=True, port=6789,
-):
+) -> NZBGetAPI:
     """Get an instance of NZBGetAPI."""
-    return pynzbgetapi.NZBGetAPI(
+    return NZBGetAPI(
         host, username, password, secure, verify_certificate, port,
     )
 
@@ -273,7 +273,7 @@ class NZBGetDataUpdateCoordinator(DataUpdateCoordinator[Device]):
         try:
             data = await hass.async_add_executor_job(self._update_data)
             return data
-        except pynzbgetapi.NZBGetAPIException as error:
+        except NZBGetAPIException as error:
             raise UpdateFailed(f"Invalid response from API: {error}")
 
 
