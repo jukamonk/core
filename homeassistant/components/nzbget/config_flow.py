@@ -2,7 +2,7 @@
 import logging
 from typing import Any, Dict, Optional
 
-import pynzbgetapi
+from pynzbgetapi import NZBGetAPI, NZBGetAPIException
 import voluptuous as vol
 
 from homeassistant.config_entries import CONN_CLASS_LOCAL_POLL, ConfigFlow, OptionsFlow
@@ -36,7 +36,7 @@ def validate_input(hass: HomeAssistantType, data: dict) -> Dict[str, Any]:
 
     Data has the keys from DATA_SCHEMA with values provided by the user.
     """
-    nzbget_api = pynzbgetapi.NZBGetAPI(
+    nzbget_api = NZBGetAPI(
         data[CONF_HOST],
         data[CONF_USERNAME],
         data[CONF_PASSWORD],
@@ -80,7 +80,7 @@ class NZBGetConfigFlow(ConfigFlow, domain=DOMAIN):
 
         try:
             await self.hass.async_add_executor_job(validate_input, self.hass, user_input)
-        except pynzbgetapi.NZBGetAPIException:
+        except NZBGetAPIException:
             return self._show_setup_form({"base": "cannot_connect"})
         except Exception:  # pylint: disable=broad-except
             _LOGGER.exception("Unexpected exception")
