@@ -78,6 +78,9 @@ class NZBGetConfigFlow(ConfigFlow, domain=DOMAIN):
         if CONF_VERIFY_SSL not in user_input:
             user_input[CONF_VERIFY_SSL] = DEFAULT_VERIFY_SSL
 
+        if self._host_already_configured(user_input[CONF_HOST], user_input[CONF_PORT]):
+            return self.async_abort(reason="already_configured")
+
         try:
             await self.hass.async_add_executor_job(validate_input, self.hass, user_input)
         except NZBGetAPIException:
@@ -107,6 +110,17 @@ class NZBGetConfigFlow(ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="user", data_schema=vol.Schema(data_schema), errors=errors or {},
         )
+
+    def _host_already_configured(self, host, port):
+        """See if we already have a nzbget entry matching the host and port."""
+        for entry in self._async_current_entries():
+            if CONF_HOST not in entry.data:
+                continue
+
+            if entry.data[CONF_HOST] == host and entry.data[CONF_PORT] == port:
+                return True
+
+        return False
 
 
 class NZBGetOptionsFlowHandler(OptionsFlow):
