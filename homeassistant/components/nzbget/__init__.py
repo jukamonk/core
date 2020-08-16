@@ -64,6 +64,15 @@ CONFIG_SCHEMA = vol.Schema(
 )
 
 
+def _get_nzbget_api_instance(
+    host, username=None, password=None, secure=False, verify_certificate=True, port=6789,
+):
+    """Get an instance of NZBGetAPI."""
+    return pynzbgetapi.NZBGetAPI(
+        host, username, password, secure, verify_certificate, port,
+    )
+
+
 def old_setup(hass, config):
     """Set up the NZBGet sensors."""
     def service_handler(service):
@@ -208,7 +217,8 @@ class NZBGetDataUpdateCoordinator(DataUpdateCoordinator[Device]):
         self, hass: HomeAssistantType, *, config: dict,
     ):
         """Initialize global NZBGet data updater."""
-        self.nzbget = npynzbgetapi.NZBGetAPI(
+        self.nzbget = await hass.async_add_executor_job(
+            _get_nzbget_api_instance,
             config[CONF_HOST],
             config[CONF_USERNAME],
             config[CONF_PASSWORD],
