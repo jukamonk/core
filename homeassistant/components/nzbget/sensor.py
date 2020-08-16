@@ -8,10 +8,11 @@ from homeassistant.const import (
     DATA_RATE_MEGABYTES_PER_SECOND,
     TIME_MINUTES,
 )
+from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.typing import HomeAssistantType
 
 from . import NZBGetDataUpdateCoordinator, NZBGetEntity
-from .const import DATA_COORDINATOR, DOMAIN
+from .const import CONF_NAME, DATA_COORDINATOR, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -73,7 +74,7 @@ class NZBGetSensor(NZBGetEntity, Entity):
         self._sensor_type = sensor_type
         self._unique_id = f"{entry_id}_{sensor_type}"
         self._unit_of_measurement = unit_of_measurement
-        
+
         super().__init__(
             coordinator=coordinator,
             entry_id=entry_id,
